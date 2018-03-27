@@ -6,10 +6,10 @@ import java.io.Serializable;
 @XmlRootElement
 public class UserDTO implements Serializable {
 
-    private String firstName;
-    private String lastName;
-    private int age;
-    private String profession;
+    private String firstName = "NA";
+    private String lastName = "NA";
+    private int age = -1;
+    private String profession = "NA";
 
     public String getFirstName() {
         return firstName;

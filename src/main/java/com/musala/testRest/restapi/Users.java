@@ -15,22 +15,21 @@ import static com.musala.testRest.restapi.User.USER_GET_USER_BY_ID;
 @Path("/users")
 public class Users {
 
-//    @PersistenceContext(name = "users")
-    private EntityManager em;
+//    @PersistenceUnit(unitName = "users")
+//    private EntityManagerFactory emf;
     private String persistenceUnitName = "users";
-    private EntityManagerFactory factory;
+    private EntityManagerFactory factory = Persistence.createEntityManagerFactory(persistenceUnitName);
+    private EntityManager em = factory.createEntityManager();
+
 //     The Java method will process HTTP POST requests
     @POST
 //     The Java method will process content identified by the MIME Media type "application/json"
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-//    TODO: add transfer object here
+
     public UserDTO persistUser(UserDTO body) {
 
         try {
-
-            factory = Persistence.createEntityManagerFactory(persistenceUnitName);
-            em = factory.createEntityManager();
 
             User user = convertToEntity(body);
             em.getTransaction().begin();
@@ -48,8 +47,6 @@ public class Users {
     @Produces( MediaType.APPLICATION_JSON)
     public List<UserDTO> getUsers() {
 
-        factory = Persistence.createEntityManagerFactory(persistenceUnitName);
-        em = factory.createEntityManager();
         Query q = em.createNamedQuery(USER_GET_USERS);
         List<User> users = q.getResultList();
         List<UserDTO> userList = new ArrayList<UserDTO>();
@@ -66,8 +63,6 @@ public class Users {
     @Path("/{id}")
     public UserDTO getUserById(@PathParam("id") int userId) {
 
-        factory = Persistence.createEntityManagerFactory(persistenceUnitName);
-        em = factory.createEntityManager();
         Query q = em.createNamedQuery(USER_GET_USER_BY_ID).setParameter("id", userId);
         User user = (User) q.getSingleResult();
 

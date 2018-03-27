@@ -25,13 +25,13 @@ public class User implements Serializable {
     @GeneratedValue
     private int id;
     @Column(name="firstName")
-    private String firstName;
+    private String firstName = "NA";
     @Column(name="lastName")
-    private String lastName;
+    private String lastName = "NA";
     @Column(name="age")
-    private int age;
+    private int age = -1;
     @Column(name="profession")
-    private String profession;
+    private String profession = "NA";
 
     public User() {
 
