@@ -4,17 +4,21 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 import static com.musala.testRest.restapi.User.USER_GET_USERS;
+import static com.musala.testRest.restapi.User.USER_GET_USER_BY_ID;
 
 @NamedQueries({
         @NamedQuery(name = USER_GET_USERS,
-        query = "SELECT u FROM User u")
+        query = "SELECT u FROM User u"),
+        @NamedQuery(name = USER_GET_USER_BY_ID,
+        query = "SELECT u FROM User u WHERE u.id = :id")
 })
 
 @Entity
 @Table(name = "user", schema = "public")
 public class User implements Serializable {
 
-    public  static final String USER_GET_USERS = "User.getUsers";
+    public static final String USER_GET_USERS = "User.getUsers";
+    public static final String USER_GET_USER_BY_ID = "User.getUserById";
 
     @Id
     @Column(name="id")
