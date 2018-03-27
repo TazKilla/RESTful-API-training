@@ -7,20 +7,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5253992b-08e5-4974-bf3b-86497ab356c2" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/musala/testRest/restapi/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/musala/testRest/restapi/User.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/musala/testRest/restapi/Users.java" afterPath="$PROJECT_DIR$/src/main/java/com/musala/testRest/restapi/Users.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/musala/testRest/restapi/User.class" afterPath="$PROJECT_DIR$/target/classes/com/musala/testRest/restapi/User.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/musala/testRest/restapi/Users.class" afterPath="$PROJECT_DIR$/target/classes/com/musala/testRest/restapi/Users.class" />
-      <change beforePath="$PROJECT_DIR$/target/rest-1.0-SNAPSHOT.war" afterPath="$PROJECT_DIR$/target/rest-1.0-SNAPSHOT.war" />
-      <change beforePath="$PROJECT_DIR$/target/rest-1.0-SNAPSHOT/WEB-INF/classes/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/target/rest-1.0-SNAPSHOT/WEB-INF/classes/META-INF/persistence.xml" />
-      <change beforePath="$PROJECT_DIR$/target/rest-1.0-SNAPSHOT/WEB-INF/classes/com/musala/testRest/restapi/User.class" afterPath="$PROJECT_DIR$/target/rest-1.0-SNAPSHOT/WEB-INF/classes/com/musala/testRest/restapi/User.class" />
-      <change beforePath="$PROJECT_DIR$/target/rest-1.0-SNAPSHOT/WEB-INF/classes/com/musala/testRest/restapi/Users.class" afterPath="$PROJECT_DIR$/target/rest-1.0-SNAPSHOT/WEB-INF/classes/com/musala/testRest/restapi/Users.class" />
-    </list>
+    <list default="true" id="5253992b-08e5-4974-bf3b-86497ab356c2" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -152,8 +139,8 @@
       <file leaf-file-name="Users.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/musala/testRest/restapi/Users.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1596">
-              <caret line="76" column="49" lean-forward="false" selection-start-line="76" selection-start-column="49" selection-end-line="76" selection-end-column="49" />
+            <state relative-caret-position="588">
+              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1735#1744#0" expanded="true" />
@@ -243,6 +230,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -581,12 +573,12 @@
       <updated>1521646901429</updated>
       <workItem from="1521646905272" duration="27026000" />
       <workItem from="1521792955947" duration="23239000" />
-      <workItem from="1522141093432" duration="10186000" />
+      <workItem from="1522141093432" duration="10524000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60451000" />
+    <option name="totallyTimeSpent" value="60789000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="2418" height="1318" extended-state="6" />
@@ -925,8 +917,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/musala/testRest/restapi/Users.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1596">
-          <caret line="76" column="49" lean-forward="false" selection-start-line="76" selection-start-column="49" selection-end-line="76" selection-end-column="49" />
+        <state relative-caret-position="588">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1735#1744#0" expanded="true" />
