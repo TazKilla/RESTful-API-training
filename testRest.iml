@@ -18,7 +18,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="Entities" />
-          <factory-entry name="users" value="25d2ee67-adaa-4c4a-a38d-aa604d3a926e" />
+          <factory-entry name="RESTDB" value="25d2ee67-adaa-4c4a-a38d-aa604d3a926e" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>

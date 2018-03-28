@@ -3,21 +3,28 @@ package com.musala.testRest.restapi;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.musala.testRest.restapi.User.USER_GET_USERS;
 import static com.musala.testRest.restapi.User.USER_GET_USER_BY_ID;
+import static com.musala.testRest.restapi.User.USER_UPDATE_USER_BY_ID;
 
 // The Java class will be hosted at the URI path "/helloworld"
 @Path("/users")
 public class Users {
 
-//    @PersistenceUnit(unitName = "users")
+//    @PersistenceUnit(unitName = "RESTDB")
 //    private EntityManagerFactory emf;
-    private String persistenceUnitName = "users";
+//    @Context
+//    private HttpServletResponse response;
+
+    private String persistenceUnitName = "RESTDB";
     private EntityManagerFactory factory = Persistence.createEntityManagerFactory(persistenceUnitName);
     private EntityManager em = factory.createEntityManager();
 
@@ -35,10 +42,13 @@ public class Users {
             em.getTransaction().begin();
             em.persist(user);
             em.getTransaction().commit();
-
+            body.setId(user.getId());
             em.close();
+//            response.setStatus(Response.Status.CREATED.getStatusCode());
+
         } catch(Exception e) {
             e.printStackTrace();
+//            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
         }
         return body;
     }
@@ -49,6 +59,8 @@ public class Users {
 
         Query q = em.createNamedQuery(USER_GET_USERS);
         List<User> users = q.getResultList();
+        em.close();
+
         List<UserDTO> userList = new ArrayList<UserDTO>();
 
         for (User user : users) {
@@ -63,10 +75,43 @@ public class Users {
     @Path("/{id}")
     public UserDTO getUserById(@PathParam("id") int userId) {
 
-        Query q = em.createNamedQuery(USER_GET_USER_BY_ID).setParameter("id", userId);
-        User user = (User) q.getSingleResult();
+        User user = null;
+        try {
+            Query q = em.createNamedQuery(USER_GET_USER_BY_ID).setParameter("id", userId);
+            user = (User) q.getSingleResult();
+            em.close();
+        } catch(Exception e) {
 
-        return convertToDto(user);
+        }
+
+        if (user != null) {
+            return convertToDto(user);
+        } else {
+            return new UserDTO();
+        }
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public UserDTO updateUserById(UserDTO body) {
+
+        Query q = em.createNamedQuery(USER_UPDATE_USER_BY_ID);
+        em.getTransaction().begin();
+        int updateCount = q.setParameter("fn", body.getFirstName())
+                .setParameter("ln", body.getLastName())
+                .setParameter("a", body.getAge())
+                .setParameter("p", body.getProfession())
+                .setParameter("id", body.getId())
+                .executeUpdate();
+        em.getTransaction().commit();
+        em.close();
+
+        if (updateCount == 1) {
+            return body;
+        } else {
+            return new UserDTO();
+        }
     }
 
     // Useful methods, User to UserDTO conversion

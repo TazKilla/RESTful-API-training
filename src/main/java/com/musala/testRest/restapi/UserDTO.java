@@ -2,14 +2,26 @@ package com.musala.testRest.restapi;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @XmlRootElement
 public class UserDTO implements Serializable {
 
+    private int id = -1;
     private String firstName = "NA";
     private String lastName = "NA";
     private int age = -1;
     private String profession = "NA";
+//    private List projectList;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -27,6 +39,10 @@ public class UserDTO implements Serializable {
         return profession;
     }
 
+//    public List getProjectList() {
+//        return projectList;
+//    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -42,6 +58,10 @@ public class UserDTO implements Serializable {
     public void setProfession(String profession) {
         this.profession = profession;
     }
+
+//    public void setProjectList(List projectList) {
+//        this.projectList = projectList;
+//    }
 
     @Override
     public String toString() {

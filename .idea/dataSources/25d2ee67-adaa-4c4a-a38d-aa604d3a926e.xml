@@ -63,8 +63,8 @@
     </role>
     <schema id="13" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2018-03-27.12:49:03.144</IntrospectionTimestamp>
-      <IntrospectionStateNumber>640</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-03-28.12:35:13.098</IntrospectionTimestamp>
+      <IntrospectionStateNumber>688</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -83,83 +83,131 @@
     <schema id="18" parent="2" name="information_schema">
       <ObjectId>12648</ObjectId>
     </schema>
-    <sequence id="19" parent="13" name="user_id_seq">
-      <ObjectId>24662</ObjectId>
-      <StateNumber>640</StateNumber>
+    <sequence id="19" parent="13" name="project_id_seq">
+      <ObjectId>24686</ObjectId>
+      <StateNumber>687</StateNumber>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <table id="20" parent="13" name="sequence">
+    <table id="20" parent="13" name="project">
+      <ObjectId>24688</ObjectId>
+      <StateNumber>687</StateNumber>
+    </table>
+    <table id="21" parent="13" name="sequence">
       <ObjectId>24657</ObjectId>
       <StateNumber>637</StateNumber>
     </table>
-    <table id="21" parent="13" name="user">
-      <ObjectId>24664</ObjectId>
-      <StateNumber>640</StateNumber>
+    <table id="22" parent="13" name="user">
+      <ObjectId>24678</ObjectId>
+      <StateNumber>687</StateNumber>
     </table>
-    <column id="22" parent="20" name="seq_name">
+    <column id="23" parent="20" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>687</StateNumber>
+      <DefaultExpression>nextval(&apos;project_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>project_id_seq</SequenceName>
+    </column>
+    <column id="24" parent="20" name="label">
+      <Position>2</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>687</StateNumber>
+    </column>
+    <column id="25" parent="20" name="budget">
+      <Position>3</Position>
+      <DataType>double precision|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>687</StateNumber>
+    </column>
+    <column id="26" parent="20" name="managerid">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>687</StateNumber>
+    </column>
+    <index id="27" parent="20" name="project_pkey">
+      <ObjectId>24692</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="28" parent="20" name="project_label_uindex">
+      <ObjectId>24699</ObjectId>
+      <ColNames>label</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="29" parent="20" name="project_pkey">
+      <ObjectId>24693</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>project_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="30" parent="20" name="project_user_id_fk">
+      <ObjectId>24694</ObjectId>
+      <ColNames>managerid</ColNames>
+      <RefTableId>24678</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="31" parent="21" name="seq_name">
       <Position>1</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>637</StateNumber>
     </column>
-    <column id="23" parent="20" name="seq_count">
+    <column id="32" parent="21" name="seq_count">
       <Position>2</Position>
       <DataType>numeric(38)|0</DataType>
       <StateNumber>637</StateNumber>
     </column>
-    <index id="24" parent="20" name="sequence_pkey">
+    <index id="33" parent="21" name="sequence_pkey">
       <ObjectId>24660</ObjectId>
       <ColNames>seq_name</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="25" parent="20" name="sequence_pkey">
+    <key id="34" parent="21" name="sequence_pkey">
       <ObjectId>24661</ObjectId>
       <ColNames>seq_name</ColNames>
       <UnderlyingIndexName>sequence_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="26" parent="21" name="id">
+    <column id="35" parent="22" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>640</StateNumber>
-      <DefaultExpression>nextval(&apos;user_id_seq&apos;::regclass)</DefaultExpression>
-      <SequenceName>user_id_seq</SequenceName>
+      <StateNumber>657</StateNumber>
     </column>
-    <column id="27" parent="21" name="firstname">
+    <column id="36" parent="22" name="age">
       <Position>2</Position>
-      <DataType>varchar(32)|0</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>640</StateNumber>
-    </column>
-    <column id="28" parent="21" name="lastname">
-      <Position>3</Position>
-      <DataType>varchar(32)|0</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>640</StateNumber>
-    </column>
-    <column id="29" parent="21" name="age">
-      <Position>4</Position>
       <DataType>integer|0</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>640</StateNumber>
+      <StateNumber>657</StateNumber>
     </column>
-    <column id="30" parent="21" name="profession">
+    <column id="37" parent="22" name="firstname">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>657</StateNumber>
+    </column>
+    <column id="38" parent="22" name="lastname">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>657</StateNumber>
+    </column>
+    <column id="39" parent="22" name="profession">
       <Position>5</Position>
-      <DataType>varchar(32)|0</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>640</StateNumber>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>657</StateNumber>
     </column>
-    <index id="31" parent="21" name="user_pkey">
-      <ObjectId>24668</ObjectId>
+    <index id="40" parent="22" name="user_pkey">
+      <ObjectId>24684</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="32" parent="21" name="user_pkey">
-      <ObjectId>24669</ObjectId>
+    <key id="41" parent="22" name="user_pkey">
+      <ObjectId>24685</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>user_pkey</UnderlyingIndexName>
       <Primary>1</Primary>

@@ -18,7 +18,7 @@ public class MyApplication extends Application {
         h.add(HelloWorld.class);
         h.add(Users.class);
         h.add(User.class);
-        //h.add(UserDTO.class);
+        h.add(Project.class);
         return h;
     }
 }
