@@ -4,6 +4,7 @@ import com.musala.testRest.restapi.Utils;
 import com.musala.testRest.restapi.projects.Project;
 import com.musala.testRest.restapi.projects.ProjectDTO;
 
+import javax.ejb.Stateful;
 import javax.persistence.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,11 +14,12 @@ import java.util.List;
 import static com.musala.testRest.restapi.users.User.*;
 
 // The Java class will be hosted at the URI path "/users"
+//@Stateful
 @Path("/users")
 public class Users {
 
-//    @PersistenceUnit(unitName = "RESTDB")
-//    private EntityManagerFactory emf;
+//    @PersistenceContext(unitName = "RESTDB", type = PersistenceContextType.EXTENDED)
+//    private EntityManager em;
 
     private String persistenceUnitName = "RESTDB";
     private EntityManagerFactory factory = Persistence.createEntityManagerFactory(persistenceUnitName);
@@ -56,6 +58,51 @@ public class Users {
         em.close();
 
         List<UserDTO> userList = new ArrayList<UserDTO>();
+
+        for (User user : users) {
+            userList.add((UserDTO) utils.convertToDto(user));
+        }
+
+        return userList;
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/search")
+    public List<UserDTO> getUsersByCriteria(
+            @QueryParam("firstName") String firstName,
+            @QueryParam("lastName") String lastName,
+            @QueryParam("age") int age,
+            @QueryParam("profession") String profession) {
+
+        String whereParams = "WHERE ";
+        boolean firstParam = true;
+        if (firstName != null) {
+            whereParams += "lower(u.firstName) LIKE lower('%" + firstName + "%') ";
+            firstParam = false;
+        }
+        if (lastName != null) {
+            if (!firstParam) whereParams += "AND ";
+            whereParams += "lower(u.lastName) LIKE lower('%" + lastName + "%') ";
+            firstParam = false;
+        }
+        if (age != 0) {
+            if (!firstParam) whereParams += "AND ";
+            whereParams += "u.age = " + age + " ";
+            firstParam = false;
+        }
+        if (profession != null) {
+            if (!firstParam) whereParams += "AND ";
+            whereParams += "lower(u.profession) LIKE lower('%" + profession + "%') ";
+        }
+
+        String fullQuery = "SELECT u FROM User u " + whereParams;
+//        return fullQuery;
+        List<UserDTO> userList = new ArrayList<UserDTO>();
+
+        Query q = em.createQuery(fullQuery);
+        List<User> users = q.getResultList();
+        em.close();
 
         for (User user : users) {
             userList.add((UserDTO) utils.convertToDto(user));
