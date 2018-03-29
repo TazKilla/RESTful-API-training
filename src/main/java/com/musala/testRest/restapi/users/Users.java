@@ -1,6 +1,8 @@
 package com.musala.testRest.restapi.users;
 
 import com.musala.testRest.restapi.Utils;
+import com.musala.testRest.restapi.projects.Project;
+import com.musala.testRest.restapi.projects.ProjectDTO;
 
 import javax.persistence.*;
 import javax.ws.rs.*;
@@ -8,9 +10,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.musala.testRest.restapi.users.User.USER_GET_USERS;
-import static com.musala.testRest.restapi.users.User.USER_GET_USER_BY_ID;
-import static com.musala.testRest.restapi.users.User.USER_UPDATE_USER_BY_ID;
+import static com.musala.testRest.restapi.users.User.*;
 
 // The Java class will be hosted at the URI path "/users"
 @Path("/users")
@@ -84,6 +84,24 @@ public class Users {
         } else {
             return new UserDTO();
         }
+    }
+
+    @GET
+    @Produces( MediaType.APPLICATION_JSON)
+    @Path("/{id}/projects")
+    public List<ProjectDTO> getProjectsByUserId(@PathParam("id") int userId) {
+
+        Query q = em.createNamedQuery(USER_GET_PROJECTS_BY_USER_ID).setParameter("mId", userId);
+        List<Project> projects = q.getResultList();
+        em.close();
+
+        List<ProjectDTO> projectList = new ArrayList<ProjectDTO>();
+
+        for (Project project : projects) {
+            projectList.add((ProjectDTO) utils.convertToDto(project));
+        }
+
+        return projectList;
     }
 
     @PUT

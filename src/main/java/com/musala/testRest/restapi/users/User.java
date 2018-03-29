@@ -6,9 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Map;
 
-import static com.musala.testRest.restapi.users.User.USER_GET_USERS;
-import static com.musala.testRest.restapi.users.User.USER_GET_USER_BY_ID;
-import static com.musala.testRest.restapi.users.User.USER_UPDATE_USER_BY_ID;
+import static com.musala.testRest.restapi.users.User.*;
 
 @NamedQueries({
         @NamedQuery(
@@ -27,16 +25,22 @@ import static com.musala.testRest.restapi.users.User.USER_UPDATE_USER_BY_ID;
                         "u.lastName = :ln, " +
                         "u.age = :a, " +
                         "u.profession = :p " +
-                        "WHERE u.id = :id")
+                        "WHERE u.id = :id"),
+        @NamedQuery(
+                name = USER_GET_PROJECTS_BY_USER_ID,
+                query = "SELECT p " +
+                        "FROM Project p " +
+                        "WHERE p.managerId = :mId")
 })
 
 @Entity
 @Table(name = "user", schema = "public")
 public class User implements Serializable {
 
-    public static final String USER_GET_USERS = "User.getUsers";
-    public static final String USER_GET_USER_BY_ID = "User.getUserById";
-    public static final String USER_UPDATE_USER_BY_ID = "User.updateUserById";
+    static final String USER_GET_USERS = "Users.getUsers";
+    static final String USER_GET_USER_BY_ID = "Users.getUserById";
+    static final String USER_GET_PROJECTS_BY_USER_ID = "Users.getProjectsByUserId";
+    static final String USER_UPDATE_USER_BY_ID = "Users.updateUserById";
 
     @Id
     @Column(name="id")
@@ -50,9 +54,9 @@ public class User implements Serializable {
     private int age = -1;
     @Column(name="profession")
     private String profession = "NA";
-    @OneToMany(mappedBy = "user")
-    @MapKey(name = "label")
-    private Map<String, Project> projects;
+//    @OneToMany(mappedBy = "user")
+//    @MapKey(name = "label")
+//    private Map<String, Project> projects;
 
     public User() {
 

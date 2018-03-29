@@ -2,6 +2,7 @@ package com.musala.testRest.restapi;
 
 import com.musala.testRest.restapi.helloworld.HelloWorld;
 import com.musala.testRest.restapi.projects.Project;
+import com.musala.testRest.restapi.projects.Projects;
 import com.musala.testRest.restapi.users.User;
 import com.musala.testRest.restapi.users.Users;
 
@@ -23,6 +24,7 @@ public class MyApplication extends Application {
         h.add(HelloWorld.class);
         h.add(Users.class);
         h.add(User.class);
+        h.add(Projects.class);
         h.add(Project.class);
         return h;
     }
