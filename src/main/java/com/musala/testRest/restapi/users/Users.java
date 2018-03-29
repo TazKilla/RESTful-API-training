@@ -18,8 +18,7 @@ import static com.musala.testRest.restapi.users.User.*;
 @Path("/users")
 public class Users {
 
-//    @PersistenceContext(unitName = "RESTDB", type = PersistenceContextType.EXTENDED)
-//    private EntityManager em;
+//    @PersistenceContext private EntityManager em;
 
     private String persistenceUnitName = "RESTDB";
     private EntityManagerFactory factory = Persistence.createEntityManagerFactory(persistenceUnitName);
@@ -73,6 +72,8 @@ public class Users {
             @QueryParam("firstName") String firstName,
             @QueryParam("lastName") String lastName,
             @QueryParam("age") int age,
+            @QueryParam("maxAge") int maxAge,
+            @QueryParam("minAge") int minAge,
             @QueryParam("profession") String profession) {
 
         String whereParams = "WHERE ";
@@ -90,13 +91,26 @@ public class Users {
             if (!firstParam) whereParams += "AND ";
             whereParams += "u.age = " + age + " ";
             firstParam = false;
+        } else if (maxAge != 0 && minAge != 0) {
+            if (!firstParam) whereParams += "AND ";
+            whereParams += "u.age BETWEEN " + minAge + " AND " + maxAge + " ";
+            firstParam = false;
+        } else if (maxAge != 0) {
+            if (!firstParam) whereParams += "AND ";
+            whereParams += "u.age <= " + maxAge + " ";
+            firstParam = false;
+        } else if (minAge != 0) {
+            if (!firstParam) whereParams += "AND ";
+            whereParams += "u.age >= " + minAge + " ";
+            firstParam = false;
         }
         if (profession != null) {
             if (!firstParam) whereParams += "AND ";
             whereParams += "lower(u.profession) LIKE lower('%" + profession + "%') ";
+            firstParam = false;
         }
 
-        String fullQuery = "SELECT u FROM User u " + whereParams;
+        String fullQuery = firstParam ? "SELECT u FROM User u" : "SELECT u FROM User u " + whereParams;
 //        return fullQuery;
         List<UserDTO> userList = new ArrayList<UserDTO>();
 
@@ -175,7 +189,8 @@ public class Users {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public UserDTO updateUserById(UserDTO body) {
+    @Path("/{id}")
+    public UserDTO updateUserById(UserDTO body, @PathParam("id") int userId) {
 
         Query q = em.createNamedQuery(USER_UPDATE_USER_BY_ID);
         em.getTransaction().begin();
@@ -183,7 +198,7 @@ public class Users {
                 .setParameter("ln", body.getLastName())
                 .setParameter("a", body.getAge())
                 .setParameter("p", body.getProfession())
-                .setParameter("id", body.getId())
+                .setParameter("id", userId)
                 .executeUpdate();
         em.getTransaction().commit();
         em.close();

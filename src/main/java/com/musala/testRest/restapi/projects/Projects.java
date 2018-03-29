@@ -15,6 +15,8 @@ import static com.musala.testRest.restapi.projects.Project.PROJECT_UPDATE_PROJEC
 @Path("/projects")
 public class Projects {
 
+//    @PersistenceContext private EntityManager em;
+
     private String persistenceUnitName = "RESTDB";
     private EntityManagerFactory factory = Persistence.createEntityManagerFactory(persistenceUnitName);
     private EntityManager em = factory.createEntityManager();
