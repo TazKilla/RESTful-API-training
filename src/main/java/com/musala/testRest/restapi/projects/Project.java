@@ -22,14 +22,13 @@ import static com.musala.testRest.restapi.projects.Project.PROJECT_UPDATE_PROJEC
                 query = "UPDATE Project p " +
                         "SET p.label = :l, " +
                         "p.budget = :b, " +
-                        "p.managerId = :a " +
+                        "p.managerId = :mId " +
                         "WHERE p.id = :id")
 })
 
 @Entity
 @Table(name = "project", schema = "public")
 public class Project implements Serializable {
-
 
     static final String PROJECT_GET_PROJECTS = "Projects.getProjects";
     static final String PROJECT_GET_PROJECT_BY_ID = "Projects.getProjectById";
@@ -38,14 +37,14 @@ public class Project implements Serializable {
     @Id
     @Column(name="id")
     @GeneratedValue
-    private int id = -1;
+    private int id;
     @Column(name="label")
     private String label = "NA";
     @Column(name="budget")
     private float budget = -1;
 //    @ManyToOne
 //    private User user = null;
-    @Column(name="managerId")
+    @Column(name="managerid")
     private int managerId = -1;
 
     public Project() {

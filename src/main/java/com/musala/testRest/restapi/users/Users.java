@@ -23,14 +23,13 @@ public class Users {
     private EntityManagerFactory factory = Persistence.createEntityManagerFactory(persistenceUnitName);
     private EntityManager em = factory.createEntityManager();
 
-    private Utils utils = new Utils();
+    private Utils utils = Utils.getInstance();
 
 //     The Java method will process HTTP POST requests
     @POST
 //     The Java method will process content identified by the MIME Media type "application/json"
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-
     public UserDTO persistUser(UserDTO body) {
 
         try {
@@ -49,7 +48,7 @@ public class Users {
     }
 
     @GET
-    @Produces( MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public List<UserDTO> getUsers() {
 
         Query q = em.createNamedQuery(USER_GET_USERS);
@@ -66,7 +65,7 @@ public class Users {
     }
 
     @GET
-    @Produces( MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public UserDTO getUserById(@PathParam("id") int userId) {
 
@@ -87,7 +86,7 @@ public class Users {
     }
 
     @GET
-    @Produces( MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}/projects")
     public List<ProjectDTO> getProjectsByUserId(@PathParam("id") int userId) {
 
@@ -102,6 +101,28 @@ public class Users {
         }
 
         return projectList;
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}/projects/{pId}")
+    public ProjectDTO getProjectsByUserId(@PathParam("id") int userId, @PathParam("pId") int projectId) {
+
+        Project project = null;
+
+        try {
+            Query q = em.createNamedQuery(USER_GET_PROJECT_BY_ID).setParameter("pId", projectId);
+            project = (Project) q.getSingleResult();
+            em.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (project != null) {
+            return (ProjectDTO) utils.convertToDto(project);
+        } else {
+            return new ProjectDTO();
+        }
     }
 
     @PUT

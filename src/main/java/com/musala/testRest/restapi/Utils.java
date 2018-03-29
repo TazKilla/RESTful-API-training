@@ -10,6 +10,18 @@ public class Utils {
 
     // Useful methods, User to UserDTO conversion
 
+    private static Utils instance = null;
+    protected Utils() {
+
+    }
+
+    public static Utils getInstance() {
+        if (instance == null) {
+            instance = new Utils();
+        }
+        return instance;
+    }
+
     private ModelMapper modelMapper() {
         return new ModelMapper();
     }

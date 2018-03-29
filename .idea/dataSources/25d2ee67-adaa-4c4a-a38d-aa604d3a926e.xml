@@ -63,8 +63,8 @@
     </role>
     <schema id="13" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2018-03-28.12:35:13.098</IntrospectionTimestamp>
-      <IntrospectionStateNumber>688</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-03-29.12:15:23.411</IntrospectionTimestamp>
+      <IntrospectionStateNumber>697</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -113,9 +113,9 @@
     </column>
     <column id="24" parent="20" name="label">
       <Position>2</Position>
-      <DataType>varchar(32)|0</DataType>
+      <DataType>varchar(64)|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>687</StateNumber>
+      <StateNumber>697</StateNumber>
     </column>
     <column id="25" parent="20" name="budget">
       <Position>3</Position>
@@ -134,7 +134,7 @@
       <Unique>1</Unique>
     </index>
     <index id="28" parent="20" name="project_label_uindex">
-      <ObjectId>24699</ObjectId>
+      <ObjectId>24700</ObjectId>
       <ColNames>label</ColNames>
       <Unique>1</Unique>
     </index>

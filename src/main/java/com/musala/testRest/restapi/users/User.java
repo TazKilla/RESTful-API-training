@@ -9,6 +9,7 @@ import java.util.Map;
 import static com.musala.testRest.restapi.users.User.*;
 
 @NamedQueries({
+        // GET methods ------------------------------------
         @NamedQuery(
                 name = USER_GET_USERS,
                 query = "SELECT u " +
@@ -19,18 +20,26 @@ import static com.musala.testRest.restapi.users.User.*;
                         "FROM User u " +
                         "WHERE u.id = :id"),
         @NamedQuery(
+                name = USER_GET_PROJECTS_BY_USER_ID,
+                query = "SELECT p " +
+                        "FROM Project p " +
+                        "WHERE p.managerId = :mId"),
+        @NamedQuery(
+                name = USER_GET_PROJECT_BY_ID,
+                query = "SELECT p " +
+                        "FROM Project p " +
+                        "WHERE p.id = :pId"),
+        // UPDATE methods ---------------------------------
+        @NamedQuery(
                 name = USER_UPDATE_USER_BY_ID,
                 query = "UPDATE User u " +
                         "SET u.firstName = :fn, " +
                         "u.lastName = :ln, " +
                         "u.age = :a, " +
                         "u.profession = :p " +
-                        "WHERE u.id = :id"),
-        @NamedQuery(
-                name = USER_GET_PROJECTS_BY_USER_ID,
-                query = "SELECT p " +
-                        "FROM Project p " +
-                        "WHERE p.managerId = :mId")
+                        "WHERE u.id = :id")
+        // PUT methods ------------------------------------
+        // DELETE methods ---------------------------------
 })
 
 @Entity
@@ -40,6 +49,7 @@ public class User implements Serializable {
     static final String USER_GET_USERS = "Users.getUsers";
     static final String USER_GET_USER_BY_ID = "Users.getUserById";
     static final String USER_GET_PROJECTS_BY_USER_ID = "Users.getProjectsByUserId";
+    static final String USER_GET_PROJECT_BY_ID = "Users.getProjectById";
     static final String USER_UPDATE_USER_BY_ID = "Users.updateUserById";
 
     @Id
