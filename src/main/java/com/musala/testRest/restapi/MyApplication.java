@@ -1,5 +1,10 @@
 package com.musala.testRest.restapi;
 
+import com.musala.testRest.restapi.helloworld.HelloWorld;
+import com.musala.testRest.restapi.projects.Project;
+import com.musala.testRest.restapi.users.User;
+import com.musala.testRest.restapi.users.Users;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
