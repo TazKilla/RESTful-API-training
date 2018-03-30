@@ -1,12 +1,23 @@
 RESTful API URIs
 
 Users
-	/users ----------------------- GET, return all users | POST, create new user
-	/users/{id} ------------------ GET, return user from id | PUT, update user with id
-	/users/{id}/projects --------- GET, return all projects for user from id
-	/users/{id}/projects/{pId} --- GET, return project from pId
-	/users/search ---------------- GET, return users from criteria (?firstName={string}&lastName={string}&age={int}&profession={string})
+	/users ------------------------ GET, returns all users
+									POST, create new user
+	/users/{id} ------------------- GET, returns user from id
+									PUT, update user with id
+	/users/{id}/projects ---------- GET, returns all projects for user from id
+	/users/{id}/projects/{pId} ---- GET, returns project from pId
+	/users/search ----------------- GET, returns users from criteria (
+											firstName={string}
+											lastName={string}
+											age={int}
+											minAge={int}
+											maxAge={int}
+											profession={string}
+										)
 
 Projects
-	/projects -------------------- GET, return all projects | POST, create new project
-	/projects/{id} --------------- GET, return project from id | PUT, update project with id
+	/projects --------------------- GET, returns all projects
+									POST, create new project
+	/projects/{id} ---------------- GET, returns project from id
+									PUT, update project with id
